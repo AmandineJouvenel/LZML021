@@ -1,0 +1,33 @@
+html {
+	backgroun-color: white;
+	font-size: 14px;
+	width: 100vw;
+	}
+	
+h1 {font-size: 2em;}
+
+h2 {font-size: 2em;}
+
+#page {
+	margin: auto;
+	text-align: center;
+	width: 70%;
+	background-color: Linen;
+	border: 5px solid salmon;
+	}	
+
+.entete {text-align: center;}
+
+#titre {font-size: 1.4em}
+
+#aboutme {
+	margin: 30px;
+	padding: 50px;
+	font-size: 1em;
+	color: black;
+	text-align: left;
+	background-color: PeachPuff;
+	border: 2px solid salmon
+	}
+
+.footer {text-align: center;}
