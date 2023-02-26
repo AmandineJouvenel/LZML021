@@ -2,6 +2,7 @@ html {
 	backgroun-color: white;
 	font-size: 14px;
 	width: 100vw;
+	font-family: "verdana";
 	}
 	
 h1 {font-size: 2em;}
@@ -28,6 +29,7 @@ h2 {font-size: 2em;}
 	text-align: left;
 	background-color: PeachPuff;
 	border: 2px solid salmon
+	box-shadow: 6px 6px 0px rgba(0, 0, 0);
 	}
 
 .footer {text-align: center;}
