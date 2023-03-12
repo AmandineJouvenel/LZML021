@@ -1,33 +1,47 @@
 html {
 	backgroun-color: white;
-	font-size: 14px;
+	font-size: 15px;
 	width: 100vw;
+	font-family: "Georgia";
 	}
 	
-h1 {font-size: 2em;}
+h1 {
+	font-size: 4em;
+	font-family: "Papyrus";
+	}
 
-h2 {font-size: 2em;}
+h2 {
+	font-size: 2em;
+	font-family: "Papyrus";
+	}
 
 #page {
 	margin: auto;
 	text-align: center;
 	width: 70%;
-	background-color: Linen;
-	border: 5px solid salmon;
+	background-image: Fond.jpg;
+	border: 5px solid RosyBrown;
 	}	
 
 .entete {text-align: center;}
 
-#titre {font-size: 1.4em}
+#titre {
+		font-size: 1.5em;
+		font-weight: bold;
+		font-family: "Papyrus";
+		background-color: Thistle;
+		text-align: center;
+		}
 
 #aboutme {
 	margin: 30px;
 	padding: 50px;
-	font-size: 1em;
+	font-size: 1.3em;
 	color: black;
 	text-align: left;
-	background-color: PeachPuff;
+	background-color: RosyBrown;
 	border: 2px solid salmon
+	box-shadow: 6px 6px 0px rgba(0, 0, 0);
 	}
 
 .footer {text-align: center;}
