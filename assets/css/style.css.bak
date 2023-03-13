@@ -1,5 +1,5 @@
 html {
-	backgroun-color: white;
+	background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700409780.jpg);
 	font-size: 15px;
 	width: 100vw;
 	font-family: "Georgia";
@@ -19,7 +19,7 @@ h2 {
 	margin: auto;
 	text-align: center;
 	width: 70%;
-	background-image: Fond.jpg;
+	background-image: linear-gradient(LightPink, LightSalmon, LemonChiffon, Thistle, Plum);
 	border: 5px solid RosyBrown;
 	}	
 
@@ -39,9 +39,13 @@ h2 {
 	font-size: 1.3em;
 	color: black;
 	text-align: left;
-	background-color: RosyBrown;
+	background-image: linear-gradient(RosyBrown, PaleVioletRed);
 	border: 2px solid salmon
 	box-shadow: 6px 6px 0px rgba(0, 0, 0);
+	}
+
+#tableau {
+	background-image: linear-gradient(LightPink, LightSalmon, Yellow, Plum);
 	}
 
 .footer {text-align: center;}

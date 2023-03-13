@@ -46,8 +46,6 @@ function exercice3() {
 	
 	// on segmente le texte en coupant à chaque espace
 		var mots3a = text3c.split(" ");
-
-	// on retire les mots qui ont une taille de 3 ou moins...
 	
 	// mots3b ne conserve que les mots qui sont strictement supérieurs à 3
 		const mots3b = mots3a.filter(word => word.length > 3);		
@@ -79,7 +77,7 @@ function exercice4() {
 	// on crée un élément paragraphe
 		const para4 = document.createElement("p");
 		
-	// 	on crée un noeud dans lequel on place la variable resultat4
+	// 	on crée un noeud dans lequel on place la chaîne de caractères vide
 		const noeud4 = document.createTextNode(resultat4);
 		
 	// 	on place le paragraphe para4 dans le TestNode noeud4

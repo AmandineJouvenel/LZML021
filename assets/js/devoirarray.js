@@ -46,10 +46,8 @@ function exercice3() {
 	
 	// on segmente le texte en coupant à chaque espace
 		var mots3a = text3c.split(" ");
-
-	// on retire les mots qui ont une taille de 3 ou moins...
 	
-	// mots3b ne conserve que les mots qui sont strictement supérieurs à 3
+	// mots3b ne conserve que les mots qui sont strictement supérieurs à 3 lettres
 		const mots3b = mots3a.filter(word => word.length > 3);		
 	
 	// on place mots3b dans le paragraphe d'identifiant "exercice3Resultat"
