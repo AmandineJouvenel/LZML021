@@ -4,3 +4,95 @@ function majuscule() {
 	}
 
 
+
+
+
+
+
+window.onload = function() {
+    let fileInput = document.getElementById('fileInput');
+    let fileDisplayArea = document.getElementById('fileDisplayArea');
+
+    // On "écoute" si le fichier donné a été modifié.
+    // Si on a donné un nouveau fichier, on essaie de le lire.
+    fileInput.addEventListener('change', function(e) {
+        // Dans le HTML (ligne 22), fileInput est un élément de tag "input" avec un attribut type="file".
+        // On peut récupérer les fichiers données avec le champs ".files" au niveau du javascript.
+        // On peut potentiellement donner plusieurs fichiers,
+        // mais ici on n'en lit qu'un seul, le premier, donc indice 0.
+        let file = fileInput.files[0];
+        // on utilise cette expression régulière pour vérifier qu'on a bien un fichier texte.
+        let textType = new RegExp("text.*");
+
+        if (file.type.match(textType)) { // on vérifie qu'on a bien un fichier texte
+            // lecture du fichier. D'abord, on crée un objet qui sait lire un fichier.
+            var reader = new FileReader();
+
+            // on dit au lecteur de fichier de placer le résultat de la lecture
+            // dans la zone d'affichage du texte.
+            reader.onload = function(e) {
+                fileDisplayArea.innerText = reader.result;
+            }
+
+            // on lit concrètement le fichier.
+            // Cette lecture lancera automatiquement la fonction "onload" juste au-dessus.
+            reader.readAsText(file);    
+
+            document.getElementById("logger").innerHTML = '<span class="infolog">Fichier chargé avec succès</span>';
+        } else { // pas un fichier texte : message d'erreur.
+            fileDisplayArea.innerText = "";
+            document.getElementById("logger").innerHTML = '<span class="errorlog">Type de fichier non supporté !</span>';
+        }
+    });
+}
+
+
+
+function FonctionAide() {
+	let div = document.getElementById("aide");
+	let b = document.getElementById("button_aide").innerHTML; 
+  		if (div.style.display === "none") {
+   			div.style.display = "block";
+	  		let change = b.replace("Afficher","Masquer");
+	  		document.getElementById("button_aide").innerHTML = change;
+	  		} 	
+		else {
+			div.style.display = "none";
+			var change = b.replace("Masquer","Afficher");
+	    	document.getElementById("button_aide").innerHTML = change;
+	    	}
+
+
+
+
+function FonctionSegmentation() {
+	
+	// on récupère le contenu de l'élément d'identifiant "fileDisplayArea" et on le stocke dans une variable "texte"
+	let texte = document.getElementById("fileDisplayArea").textContent;
+	
+	// on récupère la valeur de l'élément d'identifiant "delimID" et on la stocke dans une variable "delimiteurs"
+	let delimiteurs = document.getElementById("delimID").value;
+	
+	// on déspécialise les caractères suivants
+	let carSpe = /[\[\]\-\^\(\)\|\\\.\$\?\*\+\{\}\>\<]/g;
+	
+	// 
+	let delimEsc = delimiteurs.replace(carSpe, '\\$&');
+	 
+	// 
+	let regex = new RegExp("[" + delimEsc + "]", "g");
+	
+	// on segmente les éléments de la variable "texte" avec la regex
+	let segments = texte.split(regex);
+	
+	// on joint les segments en une chaîne de caractères "resultat"
+	let resultat = segments.join(" ");
+	
+	// on place la variable "resultat" dans l'élément d'identifiant "page-analysis"
+	document.getElementById("page-analysis").innerHTML = resultat;
+		}
+		
+		
+		
+		
+	

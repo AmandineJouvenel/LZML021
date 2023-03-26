@@ -49,3 +49,21 @@ h2 {
 	}
 
 .footer {text-align: center;}
+
+
+
+
+
+
+
+
+
+#page  {
+	position: relative;
+	min-height: 100%;
+}
+
+h1 {
+	margin-top: 0;
+	color:black;
+}

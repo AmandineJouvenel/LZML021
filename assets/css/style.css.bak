@@ -45,7 +45,7 @@ h2 {
 	}
 
 #tableau {
-	background-image: linear-gradient(LightPink, LightSalmon, Yellow, Plum);
+	background-image: linear-gradient(LightPink, LightSalmon, LemonChiffon, Plum);
 	}
 
 .footer {text-align: center;}

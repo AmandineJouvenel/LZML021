@@ -39,22 +39,103 @@
 		<div id="titre"><p>Cinq dernières lectures</p></div>
 		<ol>
 	     		<li><i>Promenez-vous dans les bois</i>, R. Ware</li>
+					<br />
 					<img src="assets/img/promenezvousdanslesbois.jpg" height="250"/>
 					<p></p>
+					<br />
 	     		<li><i>Blackwater Tome 5</i>, M. McDowell</li>
+					<br />
 					<img src="assets/img/blackwater5.jpg" height="250"/>
 					<p></p>
+					<br />
 	     		<li><i>Blackwater Tome 4</i>, M. McDowell</li>
+					<br />
 					<img src="assets/img/blackwater4.jpg" height="250"/>
 					<p></p>
+					<br />
 	     		<li><i>No et moi</i>, D. Vigan</li>
+					<br />
 					<img src="assets/img/noetmoi.jpg" height="250"/>
 					<p></p>
+					<br />
 	     		<li><i>La Maison du péril</i>, A. Christie</li>
+					<br />
 					<img src="assets/img/lamaisonduperil.jpg" height="250"/>
 		</ol>
 		</div>
 		<footer><p><a href="http://www.univ-paris3.fr/">Sorbonne Nouvelle</a></p></footer>
-    	</body>
+
+
+
+
+
+
+
+
+
+        <div id="container">
+            <h2 style="text-align:center;">Analyse des <span style="color:green">données</span> dans un fichier</h2>
+
+            <div id="page-wrapper">
+                <div>
+                    <center><button id="button_aide" onclick="FonctionAide()">Afficher l'aide</button></center>
+                    <div id="aide" style="display:none;">
+                        <p>Quelques indications pour vous aider : 
+						</br>Sélectionnez un fichier au format .txt en cliquant sur le bouton "Choisir un fichier".
+						</br>Dans le champs de texte "Délimiteurs", entrez les caractères selon lesquels vous souhaitez segmenter le texte.
+						</br>Pour lancer la segmentation du texte, cliquez sur le bouton 3segmentation.
+						</br>Le texte segmenté s'affiche en dessous.</p>
+                    </div>
+                </div>
+                </br>
+                <div>
+                    <span>
+                        <label for="fileInput" class="btn"><small>Sélectionner un fichier au format .txt
+                                :</small></label>
+                        <input id="fileInput" type="file" accept="text/plain" name="Fichier (.txt)" />
+                    </span>
+                </div>
+                <br />
+                <p style="text-align:center;">
+                    <small>
+                        <label for="delimID" class="mylabel">Délimiteur(s)</label>
+                        &nbsp;
+                        <input type="text" value=" ,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
+                    </small>
+                    <br />
+                    <small>
+                        <label for="poleID" class="mylabel">Pôle</label>
+                        &nbsp;
+                        <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
+                    </small>
+                    &nbsp;
+                    <small>
+                        <label for="lgID" class="mylabel">Longueur</label>
+                        &nbsp;
+                        <input type="text" value="10" name="lg" id="lgID" size="10" />
+                    </small>
+                    <br />
+                    <br />
+                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
+                    <br />
+                    <br />
+                    <button class="seg" onclick="segText()"><span>Segmentation</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !');"><span>action 1</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+                </p>
+            </div>
+            <div id="logger" style="width:100%"></div>
+            <br />
+            <div id="Global">
+                <div id="fileDisplayArea"></div>
+                <div id="page-analysis"></div>
+            </div>
+        </div>	
+
 </div>
+	</body>
 </html>
