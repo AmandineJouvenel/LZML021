@@ -1,35 +1,42 @@
 // exercice 1
+
 function prenom() {
-    // on récupère le prénom on le met dans l'élément avec id holder1
-    // compléter le code ici 
-    let pren = document.getElementById("prenom").value;
-    document.getElementById("holder1").innerHTML = pren;
-}
+																	// on récupère le prénom on le met dans l'élément avec id holder1
+																	// compléter le code ici
+																	
+	var pren = document.getElementById("prenom").value; 			// la variable prénom prend la valeur du texte de l'élément d'id "prenom"
+	document.getElementById("holder1").innerHTML = pren; 			// on met la valeur de la variable prenom dans l'élément d'id holder1
+	}
 
 function nomdefamille() {
-    // on récupère le nom on le met dans l'élément avec id holder1
-    // compléter le code ici
-    let nom = document.getElementById("nomdefamille").value;
-    document.getElementById("holder1").innerHTML = nom;
-}
+																	// on récupère le nom on le met dans l'élément avec id holder1
+																	// compléter le code ici
+																	
+	let nom = document.getElementById("nomdefamille").value; 		// la variable nom prend la valeur de l'élément d'id "nomdefamille"
+	document.getElementById("holder1").innerHTML = nom; 			// on met la valeur de la variable nom dans l'élément d'id holder1
+	}
 
 function nomcomplet() {
-    // on concatène prénom et nom pour afficher le nom entier et on met le résultat dans l'élément avec id holder1
-    // compléter le code ici
-    let pren = document.getElementById("prenom").value;
-    let nom = document.getElementById("nomdefamille").value;
-    let prenom_nom = pren.concat(" ", nom);
-    document.getElementById("holder1").innerHTML = prenom_nom;
-}
+																	// on concatène prénom et nom pour afficher le nom entier et on met le résultat dans l'élément avec id holder1
+																	// compléter le code ici
+																	
+	let pren = document.getElementById("prenom").value; 			// la variable prénom prend la valeur du texte de l'élément d'id "prenom"
+	let nom = document.getElementById("nomdefamille").value; 		// la variable nom prend la valeur du texte de l'élément d'id "nomdefamille"
+	let prenom_nom = pren.concat(" ", nom);							// la variable prenom_nom est la concaténation de prenom + nom (avec un espace)
+	document.getElementById("holder1").innerHTML = prenom_nom;		// on met la valeur de la variable prenom_nom dans l'élément d'id holder2
+	}
+
 
 
 // exercice 2
+
 function segmentText() {
-    // on récupère le texte de l'élément d'id texte, on le découpe et on le place dans l'élément avec id holder2
-    // compléter le code ici
-    let text = document.getElementById("texte").value;
-    text = text.replace(/[.,\"]/g,"");
-    text = text.replace(/\'/g," ");
-    const mots = text.split(" ");
-    document.getElementById("holder2").innerHTML = mots;
-}
+																	// on récupère le texte de l'élément d'id texte, on le découpe et on le place dans l'élément avec id holder2
+																	// compléter le code ici
+																	
+	let text = document.getElementById("texte").value; 				// la variable text prend la valeur de l'élément d'id "texte"
+	text = text.replace(/[ .,\"\']/g," "); 							// on remplace tous les signes de ponctuation et les espaces par un espace
+	text = text.replace(/[ ]+/g," ");								// on remplace toutes les séquences de 1 ou plusieurs espaces par un espace
+	const mots = text.split(" ");									// la constante mots est associée à la segmentation du texte (à chaque espace)
+	document.getElementById("holder2").innerHTML = mots;			// on met la constante mots dans l'élément avec l'id holder2
+	}

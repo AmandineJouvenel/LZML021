@@ -1,51 +1,95 @@
 html {
-	background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700409780.jpg);
-	font-size: 15px;
-	width: 100vw;
-	font-family: "Georgia";
-	}
-	
+    font-family: Noto, Verdana, Helvetica;
+    font-size: 14px;
+    background-color: Blue;
+    width:100vw; /* en soi, inutile, voire peut avoir des effets indésirables */
+}
+
 h1 {
-	font-size: 4em;
-	font-family: "Papyrus";
-	}
+    font-size: 3rem;
+}
 
 h2 {
-	font-size: 2em;
-	font-family: "Papyrus";
-	}
+    font-size: 2rem;
+}
 
 #page {
-	margin: auto;
-	text-align: center;
-	width: 70%;
-	background-image: linear-gradient(LightPink, LightSalmon, LemonChiffon, Thistle, Plum);
-	border: 5px solid RosyBrown;
-	}	
+    margin: auto; /* centrer */
+	background-image: linear-gradient(LightPink, LightSalmon, Thistle, Plum);
+    border: 3px solid black;
+    width: 80%;
+}
 
-.entete {text-align: center;}
-
-#titre {
-		font-size: 1.5em;
-		font-weight: bold;
-		font-family: "Papyrus";
-		background-color: Thistle;
-		text-align: center;
-		}
+.entete {
+    text-align: center;
+}
 
 #aboutme {
-	margin: 30px;
-	padding: 50px;
-	font-size: 1.3em;
-	color: black;
-	text-align: left;
-	background-image: linear-gradient(RosyBrown, PaleVioletRed);
-	border: 2px solid salmon
-	box-shadow: 6px 6px 0px rgba(0, 0, 0);
-	}
+    padding-left:5%;
+}
 
-#tableau {
-	background-image: linear-gradient(LightPink, LightSalmon, LemonChiffon, Plum);
-	}
+footer {
+    background-color: rgb(230, 230, 230);
+    border: 1px solid black;
+    text-align: center;
+}
 
-.footer {text-align: center;}
+
+.mylabel {
+	background-color: rgb(255, 204, 51);
+	font-family: arial,helvetica,sans-serif;
+	font-variant: small-caps;
+	font-size: 90%;
+	padding: 2px;
+	border-right: 1px solid rgb(204, 153, 0);
+	border-bottom: 1px solid rgb(204, 153, 0);
+}
+
+.infolog {
+	text-align:center;
+	border: 2pt solid rgb(0, 128, 0);
+	padding: 1pt;
+	margin-left: 0px;
+	margin-right: 0px;
+	background: rgb(128, 255, 128);
+}
+
+.errorlog {
+	text-align:center;
+	border: 2pt solid rgb(255, 0, 0);
+	padding: 2pt;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: rgb(255, 96, 96);
+}
+
+#page-wrapper {
+	width: 600px;
+	background: #cee1fd;
+	padding: 1em;
+	margin: 1em auto;
+	border-top: 5px solid #69c773;
+	box-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+#Global {
+	margin-right: auto; 
+	margin-left: auto; 
+	width: 80%; 
+	border: 3px; 
+	display:table;
+}
+#Global #fileDisplayArea {
+	float:left;
+	width:48%;
+	background: #FFF;
+	font-size:0.6em;
+	height:200px;
+	overflow:scroll;
+}
+#Global #page-analysis {
+	margin-left:52%;
+	background: #FFF;
+	height:200px;
+	overflow:scroll;
+}

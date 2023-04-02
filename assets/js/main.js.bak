@@ -1,14 +1,3 @@
-function majuscule() {
-	let text = document.getElementById("texte1").innerHTML;
-	document.getElementById("texte1").innerHTML = text.toUpperCase();
-	}
-
-
-
-
-
-
-
 window.onload = function() {
     let fileInput = document.getElementById('fileInput');
     let fileDisplayArea = document.getElementById('fileDisplayArea');
@@ -32,67 +21,88 @@ window.onload = function() {
             // dans la zone d'affichage du texte.
             reader.onload = function(e) {
                 fileDisplayArea.innerText = reader.result;
+				segText();
+				let nbTokens = global_var_tokens.length;
+                document.getElementById("logger2").innerHTML = '<span class="infolog">Nombre de tokens : ' + nbTokens + ' </span>';
             }
 
             // on lit concrètement le fichier.
             // Cette lecture lancera automatiquement la fonction "onload" juste au-dessus.
             reader.readAsText(file);    
 
-            document.getElementById("logger").innerHTML = '<span class="infolog">Fichier chargé avec succès</span>';
+            document.getElementById("logger1").innerHTML = '<span class="infolog">Fichier chargé avec succès</span>';
         } else { // pas un fichier texte : message d'erreur.
             fileDisplayArea.innerText = "";
-            document.getElementById("logger").innerHTML = '<span class="errorlog">Type de fichier non supporté !</span>';
+            document.getElementById("logger1").innerHTML = '<span class="errorlog">Type de fichier non supporté !</span>';
         }
     });
 }
 
 
-
-function FonctionAide() {
-	let div = document.getElementById("aide");
-	let b = document.getElementById("button_aide").innerHTML; 
-  		if (div.style.display === "none") {
-   			div.style.display = "block";
-	  		let change = b.replace("Afficher","Masquer");
-	  		document.getElementById("button_aide").innerHTML = change;
-	  		} 	
-		else {
-			div.style.display = "none";
-			var change = b.replace("Masquer","Afficher");
-	    	document.getElementById("button_aide").innerHTML = change;
-	    	}
-
+function afficheCacheAide() {
+    let aide = document.getElementById("aide");
+    let boutonAide = document.getElementById("boutonAide");
+    let display = aide.style.display;
+    
+    if (display === "none") {
+        aide.style.display = "block";
+        boutonAide.innerText = "Cacher l'aide";
+    } else {
+        aide.style.display = "none";
+        boutonAide.innerText = "Afficher l'aide";
+    }
+}
 
 
+function segmentation() {
+    let text = document.getElementById("fileDisplayArea").innerText;
+    let delim = document.getElementById("delimID").value;
+    let display = document.getElementById("page-analysis");
 
-function FonctionSegmentation() {
-	
-	// on récupère le contenu de l'élément d'identifiant "fileDisplayArea" et on le stocke dans une variable "texte"
-	let texte = document.getElementById("fileDisplayArea").textContent;
-	
-	// on récupère la valeur de l'élément d'identifiant "delimID" et on la stocke dans une variable "delimiteurs"
-	let delimiteurs = document.getElementById("delimID").value;
-	
-	// on déspécialise les caractères suivants
-	let carSpe = /[\[\]\-\^\(\)\|\\\.\$\?\*\+\{\}\>\<]/g;
-	
-	// 
-	let delimEsc = delimiteurs.replace(carSpe, '\\$&');
-	 
-	// 
-	let regex = new RegExp("[" + delimEsc + "]", "g");
-	
-	// on segmente les éléments de la variable "texte" avec la regex
-	let segments = texte.split(regex);
-	
-	// on joint les segments en une chaîne de caractères "resultat"
-	let resultat = segments.join(" ");
-	
-	// on place la variable "resultat" dans l'élément d'identifiant "page-analysis"
-	document.getElementById("page-analysis").innerHTML = resultat;
-		}
-		
-		
-		
-		
-	
+    let regex_delim = new RegExp(
+        "["
+        + delim
+            .replace("-", "\\-") // le tiret n'est pas à la fin : il faut l'échapper, sinon erreur sur l'expression régulière
+            .replace("[", "\\[").replace("]", "\\]") // à changer sinon regex fautive, exemple : [()[]{}] doit être [()\[\]{}], on doit "échapper" les crochets, sinon on a un symbole ] qui arrive trop tôt.
+        + "\\s" // on ajoute tous les symboles d'espacement (retour à la ligne, etc)
+        + "]+" // on ajoute le + au cas où plusieurs délimiteurs sont présents : évite les tokens vides
+    );
+
+    let tokens = text.split(regex_delim);
+    tokens = tokens.filter(x => x.trim() != ''); // on s'assure de ne garder que des tokens "non vides"
+
+    global_var_tokens = tokens; // décommenter pour vérifier l'état des tokens dans la console développeurs sur le navigateur
+    display.innerHTML = tokens.join(" ");
+}
+
+
+
+function dictionnaire() {
+
+  let FreqToken = {};
+  let tokens = global_var_tokens;
+  
+  // Pour chaque token, on compte le nombre d'occurences
+  tokens.forEach(token => FreqToken[token] = (FreqToken[token] || 0) + 1);
+  
+  // On convertit l'objet en tableau avec à chaque fois une clé associée à une valeur
+  let clevaleur = Object.entries(FreqToken);
+  
+  // On trie le tableau par valeur décroissante
+  clevaleur.sort((a, b) => b[1] - a[1]);
+  
+  // On crée une entête au tableau
+  let entete = [['<b>Token</b>', '<b>Fréquence</b>']];
+  
+  // On crée un tableau contenant les paires clé-valeur définies par clevaleur
+  let tableauGlobal = clevaleur.map(pair => [pair[0], pair[1]]);
+  
+  // On concatène l'entête et le tableau global
+  let finalTable = entete.concat(tableauGlobal);
+  
+  // On crée le tableau HTML à partir du tableau final
+  let tableHtml = finalTable.map(row => '<tr><td>' + row.join('</td><td>') + '</td></tr>').join('');
+  
+  // On affiche le tableau HTML dans l'élément d'identifiant 'page-analysis'
+  document.getElementById('page-analysis').innerHTML = '<table>' + tableHtml + '</table>';
+}

@@ -1,106 +1,122 @@
-
-
 <!DOCTYPE html>
-	<html>
-		<head>
-			<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
-			<link rel="stylesheet" href="assets/css/style.css">
-			<script src="assets/js/main.js"></script>
-			<title>Le titre de la page.</title>
-		</head>
-        <body>
-        	<div id="page">
-        		<div class="entete">
-        			<div id="logo"><img src="assets/img/sorbonne-nouvelle-devise-trapezes.png" alt="logoSBN" width="20%" height="20%"></div>
-                    <h1>AROUN</h1>
-                    <h2>Licence 3</h2>  
-                    <img src="assets/img/avatar.png" alt="photo_profil" width="10%" height="10%">
-                </div>
-                <div id="aboutme">  
-                	<p id="cv">
-                		<b>Mon CV :</b>
-                			<table>
-                				<thead>
-                					<tr><th>Années</th><th>Parcours</th></tr>
-                                </thead> 
-                                <tbody>
-                                    <tr><td>2022-2023</td><td>Licence 3 Sciences du Langage</td></tr>
-                                    <tr><td>2021-2022</td><td>Licence 2 Sciences du Langage</td></tr>
-                                    <tr><td>2020-2021</td><td>Licence 1 Sciences du Langage</td></tr> 
-                                </tbody>
-                            </table>
-                    </p>
-                    <br>
-                    <p id="lecture">
-                    	<p><b>Liste de mes dernières lectures :</b></p>
-                    		<ol>
-                    			<li><i>Anthropologie des pratiques langagières</i>, Bornand et Leguy</li>
-                                <li><i>Une anthropologie de la variation</i>, Franz Boas</li>
-                                <li><i>Une écologie des relations</i>, Philippe Descola</li>
-                                <li><i>L'Analyse structurale en Linguistique et en Anthropologie</i>, Claude Lévi-Strauss</li>
-                                <li><i>Roman Jakobson et Claude Lévi-Strauss : linguistique et anthropologie structurales</i>, Jacques Durand et Jean-Pierre Albert</li>
-                            </ol>
-                        </p>
-                        <p id="datetime">
-                            <button class="fade" onclick="date_heure()" id="btn1">Cliquez pour afficher la date et l'heure</button>
-                            <button class="fade" onclick="maj()" id="btn2" style="display:none">Cliquez pour afficher en majuscules</button>
-                            <p id="holder1"></p>
-                        </p>
-                </div> 
-                <!-- Analyse des données dans un fichier -->
-                <div id="container">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script type="text/javascript" language="javascript" src="assets/js/main.js"></script>
+    </head>
+
+    <body>
+<div id="page">
+
+
+
+
+<div class="entete">
+		<img src="assets/img/sorbonne-nouvelle-devise-trapezes.png" height="75"/>
+		<p></p>
+		<button onclick="majuscule()">Afficher le nom en majuscules</button>
+		<p></p>
+
+		<h1 id="texte1">Amandine Jouvenel</h1>
+		<h2>L3 de Sciences du langage</h2>
+
+        <img src="assets/img/imageprofil.png" height="175"/>
+	</div>
+	<div id="aboutme">
+		<div id="titre"><p>CV des trois dernières années</p></div>
+			<div id="tableau">
+        	<table>
+	     		<thead>
+	          		<tr><th>Année</th><th>Parcours</th></tr>
+	     		</thead>
+	     		<tbody>
+	          		<tr><td>2020-2021</td><td>L1 Sciences du langage</td></tr>
+	          		<tr><td>2021-2022</td><td>L2 Sciences du langage</td></tr>
+	          		<tr><td>2022-2023</td><td>L3 Sciences du langage</td></tr>
+	     		</tbody>
+			</table>
+			</div>
+		<div id="titre"><p>Cinq dernières lectures</p></div>
+		<ol>
+	     		<li><i>Promenez-vous dans les bois</i>, R. Ware</li>
+				<li><i>Blackwater Tome 5</i>, M. McDowell</li>
+				<li><i>Blackwater Tome 4</i>, M. McDowell</li>
+	     		<li><i>No et moi</i>, D. Vigan</li>
+	     		<li><i>La Maison du péril</i>, A. Christie</li>
+		</ol>
+		</div>
+		<footer><p><a href="http://www.univ-paris3.fr/">Sorbonne Nouvelle</a></p></footer>
+</div>
+
+
+
+
+<!-- Analyse des données dans un fichier -->
+
+<div id="container">
             <h2 style="text-align:center;">Analyse des <span style="color:green">données</span> dans un fichier</h2>
 
-            <div id="page-wrapper">
-                <div>
-                    <center><button id="button_aide" onclick="showHide_aide()">Afficher l'aide</button></center>
-                    <div id="aide" style="display:none;">
-                        <p>Voici un mode d'emploi :
-                        </br>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.
-                        </br>Etape 2 (facultatif) : Cliquez sur le bouton Segmentation (et précisez les délimiteurs si besoin avant).
-                        </br>Etape 3 : Cliquez sur le bouton Dictionnaire pour obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences</p>
-                    </div>
-                </div>
-                </br>
-                <div>
-                    <span>
-                        <label for="fileInput" class="btn"><small>Sélectionner un fichier au format .txt
-                                :</small></label>
-                        <input id="fileInput" type="file" accept="text/plain" name="Fichier (.txt)" />
-                    </span>
-                </div>
-                <br />
-                <p style="text-align:center;">
-                    <small>
-                        <label for="delimID" class="mylabel">Délimiteur(s)</label>
-                        &nbsp;
-                        <input type="text" value=" ,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
-                    </small>
-                    <br />
-                    <small>
-                        <label for="poleID" class="mylabel">Pôle</label>
-                        &nbsp;
-                        <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
-                    </small>
-                    &nbsp;
-                    <small>
-                        <label for="lgID" class="mylabel">Longueur</label>
-                        &nbsp;
-                        <input type="text" value="10" name="lg" id="lgID" size="10" />
-                    </small>
-                    <br />
-                    <br />
-                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
-                    <br />
-                    <br />
-                    <button class="dict" onclick="segText()"><span>Segmentation</span></button>
-                    <button class="submit" onclick="dictionnaire()"><span>Dictionnaire</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
-                </p>
+  <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
+        <button id="boutonAide" onclick="afficheCacheAide()">Afficher l'aide</button>
+        <br />
+        <div id="aide" style="display: none">
+            <h2>Ceci est l'aide de l'utilisation du site.</h2>
+            <h3>Bonjour.</h3>
+            <p>Le bouton <button onclick="javascript:void(0);">Bonjour</button> permet d'afficher un message de bienvenue.</p>
+            <h3>Charger un fichier texte.</h3>
+            <p>Pour commencer, il faut donner un fichier texte via le bouton <button onclick="javascript:void(0);">Choose File</button></p>
+            <p>Le texte chargé sera affiché à gauche.</p>
+            <h3>Segmenter le texte chargé.</h3>
+            <p>Ensuite, on clique sur le bouton <button onclick="javascript:void(0);">Segmentation</button> pour afficher le texte segmenté.</p>
+            <p>Le texte segmenté sera affiché à droite.</p>
+			<h3>Dictionnaire.</h3>
+            <p>Le bouton <button onclick="javascript:void(0);">Dictionnaire</button> permet d'afficher la fréquence de chaque token par ordre décroissant.</p>
+			<p>Le dictionnaire sera affiché à droite.</p>
+        </div>
+    </div>
+
+    <div id="page-wrapper">
+        <br />
+        <div style="text-align:center">
+            <span>
+                <label for="fileInput" class="btn"><small>Sélectionner un fichier au format .txt :</small></label>
+                <input id="fileInput" type="file" accept="text/plain" name="Fichier (.txt)" />
+            </span>
+        </div>
+        <br />
+        <p style="text-align:center;">
+            <small>
+                <label for="delimID" class="mylabel">Délimiteur(s)</label>
+                &nbsp;
+                <input type="text" value=" ,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
+            </small>
+            <br />
+            <small>
+                <label for="poleID" class="mylabel">Pôle</label>
+                &nbsp;
+                <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
+            </small>
+            &nbsp;
+            <small>
+                <label for="lgID" class="mylabel">Longueur</label>
+                &nbsp;
+                <input type="text" value="10" name="lg" id="lgID" size="10" />
+            </small>
+            <br />
+            <br />
+            <button onclick="alert('Bonjour et bienvenue sur le site !');"><span>Bonjour</span></button>
+            <br />
+            <br />
+            <button class="submit" onclick="segmentation();"><span>Segmentation</span></button>
+            <button class="submit" onclick="dictionnaire();"><span>Dictionnaire</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+        </p>
             </div>
             <div id="logger1" style="width:100%"></div>
             <div id="logger2" style="width:100%"></div>
@@ -110,8 +126,10 @@
                 <div id="page-analysis"></div>
             </div>
         </div>
-                <!-- FIN Analyse des données dans un fichier -->
-                <footer>
+                
+				<!-- FIN Analyse des données dans un fichier -->
+                
+				<footer>
                 	<p><a href="http://www.univ-paris3.fr/">Aller sur le site de Paris 3</a></p>
                 </footer>
             </div>

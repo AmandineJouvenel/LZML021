@@ -1,68 +1,40 @@
 html {
-	font-size: 14px;
-	background-color: rgb(151 155 105);
-	width: 100vw;
-	font-family: "Lucida Console", "Courier New", monospace;
+    font-family: Noto, Verdana, Helvetica;
+    font-size: 14px;
+	background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700409780.jpg);
+    width:100vw; /* en soi, inutile, voire peut avoir des effets indésirables */
 }
 
 h1 {
-	font-size: 4.5rem;
+    font-size: 3rem;
 }
 
 h2 {
-	font-size: 2rem;
+    font-size: 2rem;
 }
 
 #page {
-	margin: auto;
-	width: 90%;
-	background-color: Olive;
-	border-width: 5px;
-	border-style: solid;
-	border-color: DarkSlateGrey;
+    margin: auto; /* centrer */
+	background-image: linear-gradient(LightPink, LightSalmon, Thistle, Plum);
+    border: 3px solid black;
+    width: 80%;
 }
 
 .entete {
-	text-align: center;
+    text-align: center;
 }
 
 #aboutme {
-	margin: 15px;
-	border-width: 5px;
-	border-style: solid;
-	border-color: DarkSlateGrey;
-	background-color: rgb(206 206 156);
-	padding: 4rem;
+    padding-left:5%;
 }
 
 footer {
-	text-align: center;
+    background-color: rgb(230, 230, 230);
+    border: 1px solid black;
+    text-align: center;
 }
 
-table, th, td {
-  border: 1px solid;
-}
 
-td, th {
-	padding: 1px 8px;
-}
-
-#logo {
-	text-align: left;
-}
-
-.fade {
-	background-color: DarkKhaki;
-	color: Black;
-	transition: background-color 1s;
-	font-family: "Lucida Console", "Courier New", monospace;
-}
-
-.fade:hover {
-	background-color: rgb(198 213 74);
-}
-
-/* Analyse des données dans un fichier */
 .mylabel {
 	background-color: rgb(255, 204, 51);
 	font-family: arial,helvetica,sans-serif;
@@ -73,16 +45,22 @@ td, th {
 	border-bottom: 1px solid rgb(204, 153, 0);
 }
 
-#container {
-	background-color: white;
-	border: 3px solid black;
-	padding: 2px;
-	padding-bottom: 5%;
-	width: 80%;
-	margin-left:10%;
-	height: 100%;
-	min-height: 100%;
-	position: relative;
+.infolog {
+	text-align:center;
+	border: 2pt solid rgb(0, 128, 0);
+	padding: 1pt;
+	margin-left: 0px;
+	margin-right: 0px;
+	background: rgb(128, 255, 128);
+}
+
+.errorlog {
+	text-align:center;
+	border: 2pt solid rgb(255, 0, 0);
+	padding: 2pt;
+	margin-left: 0px;
+	margin-right: 0px;
+	background-color: rgb(255, 96, 96);
 }
 
 #page-wrapper {
@@ -95,10 +73,10 @@ td, th {
 }
 
 #Global {
-	margin-right: auto;
-	margin-left: auto;
-	width: 80%;
-	border: 3px;
+	margin-right: auto; 
+	margin-left: auto; 
+	width: 80%; 
+	border: 3px; 
 	display:table;
 }
 #Global #fileDisplayArea {
@@ -115,4 +93,3 @@ td, th {
 	height:200px;
 	overflow:scroll;
 }
-
