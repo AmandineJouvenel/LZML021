@@ -1,90 +1,64 @@
+
+
 <!DOCTYPE html>
-<html>
-<div id="page">
-
-	<head>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Le titre de la page.</title>
-		<meta charset="UTF-8"/>
-		<link rel="stylesheet" href="assets/css/style.css">
-		<script src="assets/js/main.js"></script>
-	</head>
-
-	<body>
-	<div class="entete">
-		<img src="assets/img/sorbonne-nouvelle-devise-trapezes.png" height="75"/>
-		<p></p>
-		<button onclick="majuscule()">Afficher le nom en majuscules</button>
-		<p></p>
-
-		<h1 id="texte1">Amandine Jouvenel</h1>
-		<h2>L3 de Sciences du langage</h2>
-
-        <img src="assets/img/imageprofil.png" height="175"/>
-	</div>
-	<div id="aboutme">
-		<div id="titre"><p>CV des trois dernières années</p></div>
-			<div id="tableau">
-        	<table>
-	     		<thead>
-	          		<tr><th>Année</th><th>Parcours</th></tr>
-	     		</thead>
-	     		<tbody>
-	          		<tr><td>2020-2021</td><td>L1 Sciences du langage</td></tr>
-	          		<tr><td>2021-2022</td><td>L2 Sciences du langage</td></tr>
-	          		<tr><td>2022-2023</td><td>L3 Sciences du langage</td></tr>
-	     		</tbody>
-			</table>
-			</div>
-		<div id="titre"><p>Cinq dernières lectures</p></div>
-		<ol>
-	     		<li><i>Promenez-vous dans les bois</i>, R. Ware</li>
-					<br />
-					<img src="assets/img/promenezvousdanslesbois.jpg" height="250"/>
-					<p></p>
-					<br />
-	     		<li><i>Blackwater Tome 5</i>, M. McDowell</li>
-					<br />
-					<img src="assets/img/blackwater5.jpg" height="250"/>
-					<p></p>
-					<br />
-	     		<li><i>Blackwater Tome 4</i>, M. McDowell</li>
-					<br />
-					<img src="assets/img/blackwater4.jpg" height="250"/>
-					<p></p>
-					<br />
-	     		<li><i>No et moi</i>, D. Vigan</li>
-					<br />
-					<img src="assets/img/noetmoi.jpg" height="250"/>
-					<p></p>
-					<br />
-	     		<li><i>La Maison du péril</i>, A. Christie</li>
-					<br />
-					<img src="assets/img/lamaisonduperil.jpg" height="250"/>
-		</ol>
-		</div>
-		<footer><p><a href="http://www.univ-paris3.fr/">Sorbonne Nouvelle</a></p></footer>
-
-
-
-
-
-
-
-
-
-        <div id="container">
+	<html>
+		<head>
+			<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="assets/css/style.css">
+			<script src="assets/js/main.js"></script>
+			<title>Le titre de la page.</title>
+		</head>
+        <body>
+        	<div id="page">
+        		<div class="entete">
+        			<div id="logo"><img src="assets/img/sorbonne-nouvelle-devise-trapezes.png" alt="logoSBN" width="20%" height="20%"></div>
+                    <h1>AROUN</h1>
+                    <h2>Licence 3</h2>  
+                    <img src="assets/img/avatar.png" alt="photo_profil" width="10%" height="10%">
+                </div>
+                <div id="aboutme">  
+                	<p id="cv">
+                		<b>Mon CV :</b>
+                			<table>
+                				<thead>
+                					<tr><th>Années</th><th>Parcours</th></tr>
+                                </thead> 
+                                <tbody>
+                                    <tr><td>2022-2023</td><td>Licence 3 Sciences du Langage</td></tr>
+                                    <tr><td>2021-2022</td><td>Licence 2 Sciences du Langage</td></tr>
+                                    <tr><td>2020-2021</td><td>Licence 1 Sciences du Langage</td></tr> 
+                                </tbody>
+                            </table>
+                    </p>
+                    <br>
+                    <p id="lecture">
+                    	<p><b>Liste de mes dernières lectures :</b></p>
+                    		<ol>
+                    			<li><i>Anthropologie des pratiques langagières</i>, Bornand et Leguy</li>
+                                <li><i>Une anthropologie de la variation</i>, Franz Boas</li>
+                                <li><i>Une écologie des relations</i>, Philippe Descola</li>
+                                <li><i>L'Analyse structurale en Linguistique et en Anthropologie</i>, Claude Lévi-Strauss</li>
+                                <li><i>Roman Jakobson et Claude Lévi-Strauss : linguistique et anthropologie structurales</i>, Jacques Durand et Jean-Pierre Albert</li>
+                            </ol>
+                        </p>
+                        <p id="datetime">
+                            <button class="fade" onclick="date_heure()" id="btn1">Cliquez pour afficher la date et l'heure</button>
+                            <button class="fade" onclick="maj()" id="btn2" style="display:none">Cliquez pour afficher en majuscules</button>
+                            <p id="holder1"></p>
+                        </p>
+                </div> 
+                <!-- Analyse des données dans un fichier -->
+                <div id="container">
             <h2 style="text-align:center;">Analyse des <span style="color:green">données</span> dans un fichier</h2>
 
             <div id="page-wrapper">
                 <div>
-                    <center><button id="button_aide" onclick="FonctionAide()">Afficher l'aide</button></center>
+                    <center><button id="button_aide" onclick="showHide_aide()">Afficher l'aide</button></center>
                     <div id="aide" style="display:none;">
-                        <p>Quelques indications pour vous aider : 
-						</br>Sélectionnez un fichier au format .txt en cliquant sur le bouton "Choisir un fichier".
-						</br>Dans le champs de texte "Délimiteurs", entrez les caractères selon lesquels vous souhaitez segmenter le texte.
-						</br>Pour lancer la segmentation du texte, cliquez sur le bouton 3segmentation.
-						</br>Le texte segmenté s'affiche en dessous.</p>
+                        <p>Voici un mode d'emploi :
+                        </br>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.
+                        </br>Etape 2 (facultatif) : Cliquez sur le bouton Segmentation (et précisez les délimiteurs si besoin avant).
+                        </br>Etape 3 : Cliquez sur le bouton Dictionnaire pour obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences</p>
                     </div>
                 </div>
                 </br>
@@ -116,11 +90,11 @@
                     </small>
                     <br />
                     <br />
-                    <button onclick="alert('Bonjour ! Bienvenue sur cette page !');"><span>Bonjour</span></button>
+                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
                     <br />
                     <br />
-                    <button class="seg" onclick="segText()"><span>Segmentation</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !');"><span>action 1</span></button>
+                    <button class="dict" onclick="segText()"><span>Segmentation</span></button>
+                    <button class="submit" onclick="dictionnaire()"><span>Dictionnaire</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
@@ -128,14 +102,18 @@
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
                 </p>
             </div>
-            <div id="logger" style="width:100%"></div>
+            <div id="logger1" style="width:100%"></div>
+            <div id="logger2" style="width:100%"></div>
             <br />
             <div id="Global">
                 <div id="fileDisplayArea"></div>
                 <div id="page-analysis"></div>
             </div>
-        </div>	
-
-</div>
-	</body>
-</html>
+        </div>
+                <!-- FIN Analyse des données dans un fichier -->
+                <footer>
+                	<p><a href="http://www.univ-paris3.fr/">Aller sur le site de Paris 3</a></p>
+                </footer>
+            </div>
+        </body>
+    </html>
