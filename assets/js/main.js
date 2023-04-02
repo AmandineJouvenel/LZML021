@@ -21,7 +21,7 @@ window.onload = function() {
             // dans la zone d'affichage du texte.
             reader.onload = function(e) {
                 fileDisplayArea.innerText = reader.result;
-                segText();
+                segmentation();
                 let nbTokens = global_var_tokens.length;
                 document.getElementById("logger2").innerHTML = '<span class="infolog">Nombre de tokens : ' + nbTokens + ' </span>';
             }

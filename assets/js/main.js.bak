@@ -21,14 +21,14 @@ window.onload = function() {
             // dans la zone d'affichage du texte.
             reader.onload = function(e) {
                 fileDisplayArea.innerText = reader.result;
-				segText();
-				let nbTokens = global_var_tokens.length;
+                segText();
+                let nbTokens = global_var_tokens.length;
                 document.getElementById("logger2").innerHTML = '<span class="infolog">Nombre de tokens : ' + nbTokens + ' </span>';
             }
 
             // on lit concrètement le fichier.
             // Cette lecture lancera automatiquement la fonction "onload" juste au-dessus.
-            reader.readAsText(file);    
+            reader.readAsText(file);
 
             document.getElementById("logger1").innerHTML = '<span class="infolog">Fichier chargé avec succès</span>';
         } else { // pas un fichier texte : message d'erreur.
