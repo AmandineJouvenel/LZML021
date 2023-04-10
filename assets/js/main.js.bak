@@ -1,6 +1,10 @@
+let text_tokens = [];
+
+
 window.onload = function() {
     let fileInput = document.getElementById('fileInput');
     let fileDisplayArea = document.getElementById('fileDisplayArea');
+    //let fileLoaded = false; // variable qui indique si un fichier a été chargé
 
     // On "écoute" si le fichier donné a été modifié.
     // Si on a donné un nouveau fichier, on essaie de le lire.
@@ -21,9 +25,11 @@ window.onload = function() {
             // dans la zone d'affichage du texte.
             reader.onload = function(e) {
                 fileDisplayArea.innerText = reader.result;
-                segText();
+                segmentation();
                 let nbTokens = global_var_tokens.length;
-                document.getElementById("logger2").innerHTML = '<span class="infolog">Nombre de tokens : ' + nbTokens + ' </span>';
+                let nbLines = global_var_lines.length;
+                document.getElementById("logger2").innerHTML = '<span class="infolog">Nombre de tokens : ' + nbTokens + '<br>Nombre de lignes : ' + nbLines +' </span>';
+                //let fileLoaded = true; // fichier chargé
             }
 
             // on lit concrètement le fichier.
@@ -55,54 +61,83 @@ function afficheCacheAide() {
 
 
 function segmentation() {
-    let text = document.getElementById("fileDisplayArea").innerText;
-    let delim = document.getElementById("delimID").value;
-    let display = document.getElementById("page-analysis");
+    if (document.getElementById('fileDisplayArea').innerHTML==""){
+        //alert("Il faut d'abord charger un fichier .txt !"); //autre possibilité
+        document.getElementById('logger3').innerHTML="Il faut d'abord charger un fichier .txt !";
+    } else {
+        document.getElementById('logger3').innerHTML="";
+        let text = document.getElementById("fileDisplayArea").innerText;
+        let delim = document.getElementById("delimID").value;
+        let display = document.getElementById("page-analysis");
+    
+        let regex_delim = new RegExp(
+            "["
+            + delim
+                .replace("-", "\\-") // le tiret n'est pas à la fin : il faut l'échapper, sinon erreur sur l'expression régulière
+                .replace("[", "\\[").replace("]", "\\]") // à changer sinon regex fautive, exemple : [()[]{}] doit être [()\[\]{}], on doit "échapper" les crochets, sinon on a un symbole ] qui arrive trop tôt.
+            + "\\s" // on ajoute tous les symboles d'espacement (retour à la ligne, etc)
+            + "]+" // on ajoute le + au cas où plusieurs délimiteurs sont présents : évite les tokens vides
+        );
+    
+        let tokens = text.split(regex_delim);
+        tokens = tokens.filter(x => x.trim() != ""); // on s'assure de ne garder que des tokens "non vides"
+        let lines = text.split(/\r?\n/g);
+        lines = lines.filter(line => line.trim() != "");
+    
+        global_var_tokens = tokens; // décommenter pour vérifier l'état des tokens dans la console développeurs sur le navigateur
+        global_var_lines = lines;
+        display.innerHTML = tokens.join(" ");
+    }
+}
 
-    let regex_delim = new RegExp(
-        "["
-        + delim
-            .replace("-", "\\-") // le tiret n'est pas à la fin : il faut l'échapper, sinon erreur sur l'expression régulière
-            .replace("[", "\\[").replace("]", "\\]") // à changer sinon regex fautive, exemple : [()[]{}] doit être [()\[\]{}], on doit "échapper" les crochets, sinon on a un symbole ] qui arrive trop tôt.
-        + "\\s" // on ajoute tous les symboles d'espacement (retour à la ligne, etc)
-        + "]+" // on ajoute le + au cas où plusieurs délimiteurs sont présents : évite les tokens vides
-    );
 
-    let tokens = text.split(regex_delim);
-    tokens = tokens.filter(x => x.trim() != ''); // on s'assure de ne garder que des tokens "non vides"
-
-    global_var_tokens = tokens; // décommenter pour vérifier l'état des tokens dans la console développeurs sur le navigateur
-    display.innerHTML = tokens.join(" ");
+function dictionnaire() {
+    if (document.getElementById('fileDisplayArea').innerHTML==""){
+        document.getElementById('logger3').innerHTML="Commencez par sélectionner un fichier !";
+    } else {
+        document.getElementById('logger3').innerHTML="";
+        let tokenFreq = {};
+        let tokens = global_var_tokens;
+        tokens.forEach(token => tokenFreq[token] = (tokenFreq[token] || 0) + 1);
+        let freqPairs = Object.entries(tokenFreq);
+        freqPairs.sort((a, b) => b[1] - a[1]);
+        let tableArr = [['<b>Token</b>', '<b>Fréquence</b>']];
+        let tableData = freqPairs.map(pair => [pair[0], pair[1]]);
+        let finalTable = tableArr.concat(tableData);
+        let tableHtml = finalTable.map(row => '<tr><td>' + row.join('</td><td>') + '</td></tr>').join('');
+        document.getElementById('page-analysis').innerHTML = '<table>' + tableHtml + '</table>';
+    }
 }
 
 
 
-function dictionnaire() {
-
-  let FreqToken = {};
-  let tokens = global_var_tokens;
-  
-  // Pour chaque token, on compte le nombre d'occurences
-  tokens.forEach(token => FreqToken[token] = (FreqToken[token] || 0) + 1);
-  
-  // On convertit l'objet en tableau avec à chaque fois une clé associée à une valeur
-  let clevaleur = Object.entries(FreqToken);
-  
-  // On trie le tableau par valeur décroissante
-  clevaleur.sort((a, b) => b[1] - a[1]);
-  
-  // On crée une entête au tableau
-  let entete = [['<b>Token</b>', '<b>Fréquence</b>']];
-  
-  // On crée un tableau contenant les paires clé-valeur définies par clevaleur
-  let tableauGlobal = clevaleur.map(pair => [pair[0], pair[1]]);
-  
-  // On concatène l'entête et le tableau global
-  let finalTable = entete.concat(tableauGlobal);
-  
-  // On crée le tableau HTML à partir du tableau final
-  let tableHtml = finalTable.map(row => '<tr><td>' + row.join('</td><td>') + '</td></tr>').join('');
-  
-  // On affiche le tableau HTML dans l'élément d'identifiant 'page-analysis'
-  document.getElementById('page-analysis').innerHTML = '<table>' + tableHtml + '</table>';
+function grep(){
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+    if (document.getElementById('fileDisplayArea').innerHTML==""){
+        document.getElementById('logger3').innerHTML="Commencez par sélectionner un fichier !";
+	// Sinon (si un fichier est chargé) :
+    } else {
+		// Si aucun pôle n'est entré, afficher un message d'erreur
+        if (document.getElementById('poleID').value==""){
+        document.getElementById('logger3').innerHTML="Entrez un pôle !";
+		// Sinon :
+        } else {
+            document.getElementById('logger3').innerHTML="";
+			// On attribue à la variable poleInput la valeur de l'élément d'identifiant "poleID"
+            let poleInput = document.getElementById('poleID').value;
+			// On crée une nouvelle expression régulière à partir de la variable poleInput
+            let poleRegex = new RegExp(poleInput, 'g');
+			// On crée une chaîne de caractères vide qu'on appelle "recherche", qui correspondra au résultat de la recherche
+            let recherche = "";
+			// Pour chaque ligne : 
+            for (let nblines = 0, compteur = 0; nblines < global_var_lines.length; nblines++) {
+			// Si la ligne correspond à la recherche, on l'ajoute dans la variable "recherche", avec son numéro d'occurrence dans le texte (avec le compteur)
+                if (global_var_lines[nblines].match(poleRegex)) {
+                    compteur++;
+                    recherche += "<tr><td>" + compteur + "</td><td>" + global_var_lines[nblines].replace(poleRegex, "<font color='red'>$&</font>") + "</td></tr>";
+                }
+            }
+            document.getElementById('page-analysis').innerHTML = "<table>" + recherche + "</table>";
+        }
+    }
 }

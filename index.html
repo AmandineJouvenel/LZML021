@@ -55,10 +55,7 @@
 
 <!-- Analyse des données dans un fichier -->
 
-<div id="container">
-            <h2 style="text-align:center;">Analyse des <span style="color:green">données</span> dans un fichier</h2>
-
-  <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
+    <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
         <button id="boutonAide" onclick="afficheCacheAide()">Afficher l'aide</button>
         <br />
         <div id="aide" style="display: none">
@@ -67,13 +64,13 @@
             <p>Le bouton <button onclick="javascript:void(0);">Bonjour</button> permet d'afficher un message de bienvenue.</p>
             <h3>Charger un fichier texte.</h3>
             <p>Pour commencer, il faut donner un fichier texte via le bouton <button onclick="javascript:void(0);">Choose File</button></p>
-            <p>Le texte chargé sera affiché à gauche.</p>
-            <h3>Segmenter le texte chargé.</h3>
-            <p>Ensuite, on clique sur le bouton <button onclick="javascript:void(0);">Segmentation</button> pour afficher le texte segmenté.</p>
-            <p>Le texte segmenté sera affiché à droite.</p>
-			<h3>Dictionnaire.</h3>
-            <p>Le bouton <button onclick="javascript:void(0);">Dictionnaire</button> permet d'afficher la fréquence de chaque token par ordre décroissant.</p>
-			<p>Le dictionnaire sera affiché à droite.</p>
+            <p>Le texte chargé sera affiché à gauche. Il sera segmenté automatiquement, son nombre de tokens sera alors affiché.</p>
+            <h3>Compter les mots.</h3>
+            <p>Pour avoir le comptage des mots, triés du plus fréquent au moins fréquent, on clique sur le bouton <button onclick="javascript:void(0);">Dictionnaire</button></p>
+            <p>Le tableau sera affiché à droite.</p>
+			<h3>Rechercher un élément dans le texte.</h3>
+			<p>Pour rechercher un élément dans le texte, il faut entrer un pôle, puis cliquer sur le bouton <button onclick="javascript:void(0);">GREP</button></p>
+			<p>Les lignes où une expression régulière est reconnue quelque part seront affichées à droite, avec les empans de texte reconnus en rouge.</p>
         </div>
     </div>
 
@@ -105,33 +102,27 @@
                 <input type="text" value="10" name="lg" id="lgID" size="10" />
             </small>
             <br />
-            <br />
-            <button onclick="alert('Bonjour et bienvenue sur le site !');"><span>Bonjour</span></button>
-            <br />
-            <br />
-            <button class="submit" onclick="segmentation();"><span>Segmentation</span></button>
-            <button class="submit" onclick="dictionnaire();"><span>Dictionnaire</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
-        </p>
+                    <br />
+                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
+                    <br />
+                    <br />
+                    <!-- <button class="seg" onclick="segmentation()"><span>Segmentation</span></button> -->
+                    <button class="dict" onclick="dictionnaire()"><span>Dictionnaire</span></button>
+                    <button class="grep" id="btnGrep" onclick="grep()"><span>GREP</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+                </p>
             </div>
             <div id="logger1" style="width:100%"></div>
             <div id="logger2" style="width:100%"></div>
-            <br />
+            <div id="logger3" style="width:100%"></div>
+            <br/>
             <div id="Global">
                 <div id="fileDisplayArea"></div>
                 <div id="page-analysis"></div>
             </div>
         </div>
-                
-				<!-- FIN Analyse des données dans un fichier -->
-                
-				<footer>
-                	<p><a href="http://www.univ-paris3.fr/">Aller sur le site de Paris 3</a></p>
-                </footer>
-            </div>
         </body>
     </html>

@@ -1,7 +1,7 @@
 html {
     font-family: Noto, Verdana, Helvetica;
     font-size: 14px;
-    background-color: Blue;
+	background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700409780.jpg);
     width:100vw; /* en soi, inutile, voire peut avoir des effets indésirables */
 }
 
