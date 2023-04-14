@@ -47,7 +47,6 @@
 	     		<li><i>La Maison du péril</i>, A. Christie</li>
 		</ol>
 		</div>
-		<footer><p><a href="http://www.univ-paris3.fr/">Sorbonne Nouvelle</a></p></footer>
 </div>
 
 
@@ -55,7 +54,7 @@
 
 <!-- Analyse des données dans un fichier -->
 
-    <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
+     <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
         <button id="boutonAide" onclick="afficheCacheAide()">Afficher l'aide</button>
         <br />
         <div id="aide" style="display: none">
@@ -68,9 +67,14 @@
             <h3>Compter les mots.</h3>
             <p>Pour avoir le comptage des mots, triés du plus fréquent au moins fréquent, on clique sur le bouton <button onclick="javascript:void(0);">Dictionnaire</button></p>
             <p>Le tableau sera affiché à droite.</p>
-			<h3>Rechercher un élément dans le texte.</h3>
-			<p>Pour rechercher un élément dans le texte, il faut entrer un pôle, puis cliquer sur le bouton <button onclick="javascript:void(0);">GREP</button></p>
-			<p>Les lignes où une expression régulière est reconnue quelque part seront affichées à droite, avec les empans de texte reconnus en rouge.</p>
+            <h3>Afficher les lignes qui contiennent un motif.</h3>
+            <p>Pour afficher les lignes qui contiennent un motif, on clique sur le bouton <button onclick="javascript:void(0);">grep</button></p>
+            <p>Il faut avoir chargé un fichier en mémoire et renseigné le champs <label class="mylabel"><small>Pôle</small></label>.</p>
+            <p><a href="https://fr.wikipedia.org/wiki/Grep">grep</a> est une commande historique de Unix ayant cette fonctionnalité. Nous employons ce nom en hommage.</p>
+            <p>Les lignes seront affichées à droite.</p>
+			<h3>Afficher les contextes d'apparition d'un mot.</h3>
+            <p>Pour afficher les contextes d'apparition d'un mot, on clique sur le bouton <button onclick="javascript:void(0);">concordancier</button></p>
+            <p>Il faut avoir chargé un fichier en mémoire et renseigné le champs <label class="mylabel"><small>Pôle</small></label> ainsi que le champs <label class="mylabel"><small>Longueur</small></label>.</p>
         </div>
     </div>
 
@@ -102,27 +106,30 @@
                 <input type="text" value="10" name="lg" id="lgID" size="10" />
             </small>
             <br />
-                    <br />
-                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
-                    <br />
-                    <br />
-                    <!-- <button class="seg" onclick="segmentation()"><span>Segmentation</span></button> -->
-                    <button class="dict" onclick="dictionnaire()"><span>Dictionnaire</span></button>
-                    <button class="grep" id="btnGrep" onclick="grep()"><span>GREP</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
-                </p>
-            </div>
-            <div id="logger1" style="width:100%"></div>
-            <div id="logger2" style="width:100%"></div>
-            <div id="logger3" style="width:100%"></div>
-            <br/>
-            <div id="Global">
-                <div id="fileDisplayArea"></div>
-                <div id="page-analysis"></div>
-            </div>
-        </div>
-        </body>
-    </html>
+            <br />
+            <button onclick="alert('Bonjour et bienvenue sur le site !');"><span>Bonjour</span></button>
+            <br />
+            <br />
+            <!--<button class="submit" onclick="segmentation();"><span>Segmentation</span></button>-->
+            <button class="submit" onclick="dictionnaire();"><span>dictionnaire</span></button>
+            <button class="submit" onclick="grep()"><span>grep</span></button>
+            <button class="submit" onclick="concordancier()"><span>concordancier</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
+            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+        </p>
+    </div>
+    <div id="logger" style="width:100%"></div>
+    <br />
+    <div id="Global">
+        <div id="fileDisplayArea"></div>
+        <div id="page-analysis"></div>
+    </div>
+
+    <footer>
+      <p><a href="http://www.univ-paris3.fr/">Lien vers le site de Sorbonne Nouvelle.</a></p>
+    </footer>
+
+</div>
+    </body>
+</html>

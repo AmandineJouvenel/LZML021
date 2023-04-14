@@ -93,3 +93,12 @@ footer {
 	height:200px;
 	overflow:scroll;
 }
+
+#logger3 {
+	color:red;
+}
+
+
+img{
+  display: none;
+}
