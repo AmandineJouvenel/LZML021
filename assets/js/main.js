@@ -188,7 +188,7 @@ function grep() {
     for (let line of text_lines) {
         if (line.search(pole_regex) != -1) {
             let paragraph = document.createElement("p");
-            paragraph.innerHTML = line.replaceAll(pole_regex, '<span style="color:red;">$1</span>')
+            paragraph.innerHTML = line.replaceAll(pole_regex, '<span style="color:red; font-weight : bold;">$1</span>')
             display.appendChild(paragraph);
         }
     }
@@ -199,73 +199,333 @@ function grep() {
 // Concordancier
 
 function concordancier() {
-	
-	// on initialise l'élément d'identifiant "page-analysis"
-    document.getElementById('page-analysis').innerHTML ="";
-	
-	// on récupère la valeur des variables pôle et longueur
-    var pole = document.getElementById('poleID').value;
-    var longueur = document.getElementById('lgID').value;
-	
-	// si aucun fichier n'est sélectionné, on affiche un message d'erreur
-    if (text_lines.length === 0) {
+    let pole = document.getElementById("poleID").value.trim();
+    let display = document.getElementById("page-analysis");
+	let longueur = document.getElementById('lgID').value;
+
+    if (text_tokens.length === 0) {
         // pas de lignes: erreur
         document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
         return;
     }
-    
-	// si le pôle ou la longueur ne sont pas renseignés, on affiche un message d'erreur
-	if (pole=="")  {
+
+    if (pole === '') {
+        // pas de pôle: erreur
         document.getElementById("logger").innerHTML = '<span class="errorlog">Le pôle n\'est pas renseigné !</span>';
         return;
     }
-	if (longueur=="") {
+	
+	if (longueur === '') {
+        // pas de longueur: erreur
         document.getElementById("logger").innerHTML = '<span class="errorlog">La longueur n\'est pas renseignée !</span>';
         return;
     }
-    
-	// on récupère le contenu de l'élément d'identifiant "fileDisplayArea" et on le stocke dans une variable "contenu"
-	var contenu = document.getElementById('fileDisplayArea').innerText; 
-    
-	// on crée une expression régulière qui segmente le texte en mots
-	var delimiteurs = document.getElementById('delimID').value;
-	delimiteurs += "\n\s\t";
-	var delimiteurs2 = delimiteurs.replace(/(.)/gi, "\\$1");
-	var reg = new RegExp("["+delimiteurs2+"]+", "g");
-	var tokens = contenu.split(reg);
+
+    let pole_regex = new RegExp("^" + pole + "$", "g");
+    let tailleContexte = Number(document.getElementById('lgID').value ?? "10");
+
+    let table = document.createElement("table");
+    table.style.margin = "auto";
+    let entete = table.appendChild(document.createElement("tr"));
+    entete.innerHTML = "<th>contexte gauche</th><th>pôle</th><th>contexte droit</th>";
+
+    display.innerHTML = "";
+    for (let i=0; i < text_tokens.length; i++) {
+        if (text_tokens[i].search(pole_regex) != -1) {
+            let start = Math.max(i - tailleContexte, 0);
+            let end = Math.min(i + tailleContexte, text_tokens.length);
+            let lc = text_tokens.slice(start, i);
+            let rc = text_tokens.slice(i+1, end+1);
+            let row = document.createElement("tr");
+
+            // manière fainéante
+            row.appendChild(document.createElement("td"));
+            row.childNodes[row.childNodes.length - 1].innerHTML = lc.join(' ');
+            row.appendChild(document.createElement("td"));
+            row.childNodes[row.childNodes.length - 1].innerHTML = text_tokens[i];
+            row.appendChild(document.createElement("td"));
+            row.childNodes[row.childNodes.length - 1].innerHTML = rc.join(' ');
+            table.appendChild(row);
+        }
+    }
+
+    display.innerHTML = "";
+    display.appendChild(table);
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Compteur de voyelles
+
+function voyelles() {
 	
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
+    return;
+    }
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById("page-analysis").innerText="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
 	
-	// on crée un tableau dans lequel on affichera le pôle, et ses contextes gauche et droit
-    var table='';
-    table += '<table align="center" class="myTable">';
-    table += '<th width="40%">Contexte gauche</th>';
-    table += '<th width="20%">Pôle</th>';
-    table += '<th width="40%">Contexte droit</th>';
-    table += '</tr>';
+	// On sépare le texte en caractères
+	texte = texte.split("");
 	
-	// Pour chaque mot du texte, s'il correspond au pôle, on l'ajoute à une variable "resultat"
-	// Et on ajoute ses contextes gauche et droit en fonction de la variable "longueur"
-	// On ajoute les éléments pôle, contexte gauche, et contexte droit au tableau
-	// On affiche le tableau dans l'élément d'identifiant "page-anaysis"
-	for (var nbMots = 0;nbMots<tokens.length;nbMots++) {	
-        var resultat = tokens[nbMots];
-        var reg = new RegExp("\\b"+pole+"\\b");
-        if (resultat.search(reg) > -1) {
-			var contexteDroit = "";
-			var contexteGauche = "";
-			for (var i=1;i<=longueur;i++) {
-				if (nbMots+i <= tokens.length) {
-					contexteDroit = contexteDroit+tokens[nbMots+i]+ " ";
+	// On initialise le compteur de voyelles
+	var comptVoy = 0;
+	
+	// On crée une expression régulière pour identifier les voyelles
+	var regexVoy = /[aeiouyÃÃ¡Ã¢Ã£Ã©Ã¨ÃªÃ¬Ã­Ã®Ä©Ã²Ã³Ã´ÃµÃ¹ÃºÃ»Å©]/i;
+	
+	// Pour chaque caractère du texte, si il correspond à la regex, alors on incrémente la valeur 1 au compteur
+	for (var i = 0; i < texte.length; i++) {
+		if (texte[i].match(regexVoy)) {
+			comptVoy += 1;
+		}
+	}
+	document.getElementById("page-analysis").innerHTML = "Le texte contient "+comptVoy+" voyelles.";
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Compteur de consonnes
+
+function consonnes() {
+	
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
+    return;
+    }
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById("page-analysis").innerText="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+	
+	// On sépare le texte en caractères
+	texte = texte.split("");
+	
+	// On initialise les compteurs de consonnes et de voyelles
+	var comptCons = 0;
+	
+	// On crée 2 expressions régulières pour identifier les consonnes et les voyelles
+	var regexCons = /[bcdfghjklmnpqrstvwxz]/i;
+	
+	// Pour chaque caractère du texte, si il correspond à une des 2 regex, alors on incrémente la valeur 1 au compteur correspondant
+	for (var i = 0; i < texte.length; i++) {
+		if (texte[i].match(regexCons)) {
+			comptCons += 1;
+		}
+	}
+	document.getElementById("page-analysis").innerHTML = "Le texte contient "+comptCons+" consonnes.";
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Mots les plus fréquents
+
+function motFreqCamembert() {
+	maxi=document.getElementById('maxicamID').value;
+	var toutTexte = document.getElementById("fileDisplayArea").innerText;
+	var freqs=freqMots(toutTexte.toLowerCase());
+	var etiquettes=[];
+	var series=[]
+	Object.keys(freqs).sort(function(a,b){return freqs[b]-freqs[a]}).forEach(function(m) {
+		if (m=="") return false; 
+		if (etiquettes.length < maxi) {
+				etiquettes.push(m);
+				series.push(freqs[m]);
+			}
+		else {
+				if (etiquettes.length == maxi) {
+					etiquettes.push("reste");
+					series.push(freqs[m]);
 				}
-				if (nbMots-i >= 0) {
-					contexteGauche = " "+tokens[nbMots-i]+contexteGauche;
+				else {
+					series[maxi]+=freqs[m];
 				}
 			}
-			var resultatFinal = resultat.replace(pole, "<font color='red'>"+pole+"</font>");
-			table += "<tr><td>"+contexteGauche+"</td><td>"+resultatFinal+"</td><td>"+contexteDroit+"</td></tr>";
-		}
-    }
-    table += '</table>';
-    document.getElementById('page-analysis').innerHTML+=table;
+		
+	});
+	var data = {
+			labels: etiquettes,
+			series: series
+		};
+	var options = {
+			width: 600,
+			height: 600
+		};
+	document.getElementById('page-analysis').innerHTML ="";		
+	new Chartist.Pie('#page-analysis', data, options);
 	
 }
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Mot le plus long
+
+function motlepluslong() {
+	
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
+    return;
+    }
+		
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById('page-analysis').innerHTML ="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+
+	// on segmente le texte en mots
+	var tokens = texte.split(/[\n\s,.;']+/);
+	
+	// on initialise une variable "max"
+	var max="";
+	
+	// pour chaque token, si sa longueur est supérieure à la longueur de "max", alors "max" devient ce token
+	for (i=0; i<tokens.length;i++) {
+		if (tokens[i].length>max.length)
+		{max=tokens[i]} }
+	
+	document.getElementById('page-analysis').innerHTML = 'Le mot le plus long est "'+max+'".';
+}
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Mot le plus court
+
+function motlepluscourt() {
+	
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
+    return;
+    }
+		
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById('page-analysis').innerHTML ="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+
+	// on segmente le texte en mots
+	var tokens = texte.split(/[\n\s,.;']+/);
+	
+	// on initialise une variable "min"
+	var min = tokens[0];
+	
+	// pour chaque token, si sa longueur est supérieure à 0 et inférieure à la longueur de "min", alors "min" devient ce token
+	for (i=0; i<tokens.length;i++) {
+		if (tokens[i].length > 0) {
+			if (tokens[i].length<min.length) {
+				min=tokens[i]
+				}
+			}
+		}
+	
+	document.getElementById('page-analysis').innerHTML = 'Le mot le plus court est "'+min+'".';
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Mise en minuscules
+
+function minuscule() {
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
+    return;
+    }
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById('page-analysis').innerHTML ="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+	// on met le texte en minuscules avec la fonction toLowerCase et on stocke le résultat dans une variable "minuscules"
+	minuscules = texte.toLowerCase();
+	document.getElementById("page-analysis").innerText = minuscules;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Mise en majuscules
+
+function majuscule() {
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichier !</span>';
+    return;
+    }
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById('page-analysis').innerHTML ="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+	// on met le texte en majuscules avec la fonction toUpperCase et on stocke le résultat dans une variable "minuscules"
+	majuscules = texte.toUpperCase();
+	document.getElementById("page-analysis").innerText = majuscules;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Bouton chèvre
+
+function chevre() {
+	
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abord charger un fichiêêêh !</span>';
+    return;
+    }
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById("page-analysis").innerText="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+	
+	// on sépare le texte en caractères
+	var tokens = texte.split("");
+	
+	// on crée une regex permettant de reconnaître les variantes de e
+	var regex = /[eEêèé]/gi;	
+	
+	// pour chaque élément du texte, si l'élément correspond à la regex, alors on le remplace par "êêê"
+	for (var i = 0; i < tokens.length; i++) {
+		if (tokens[i].match(regex)) {
+			texte = texte.replace(tokens[i], "êêê");
+		}
+	}
+	
+	var affichage = "<img src='assets/img/gifchevre.gif' height=auto><br/>"+texte+"";
+	
+	document.getElementById("page-analysis").innerHTML = affichage;
+}
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+// Bouton dindon
+
+function dindon() {
+	
+	// Si aucun fichier n'est chargé, afficher un message d'erreur
+	if (text_tokens.length === 0) {
+    document.getElementById("logger").innerHTML = '<span class="errorlog">Il faut d\'abugluglurd charger un fichier !</span>';
+    return;
+    }
+	// on initialise l'élément d'identifiant "page-analysis" et on récupère le contenu du fichier texte
+	document.getElementById("page-analysis").innerText="";
+	var texte = document.getElementById("fileDisplayArea").innerText;
+	
+	// on sépare le texte en caractères
+	var tokens = texte.split("");
+	
+	// on crée une regex permettant de reconnaître les variantes de e
+	var regex = /[Ooô]/gi;	
+	
+	// pour chaque élément du texte, si l'élément correspond à la regex, alors on le remplace par "êêê"
+	for (var i = 0; i < tokens.length; i++) {
+		if (tokens[i].match(regex)) {
+			texte = texte.replace(tokens[i], "glugluglu");
+		}
+	}
+	
+	var affichage = "<img src='assets/img/gifdindon.gif' height=auto><br/>"+texte+"";
+	
+	document.getElementById("page-analysis").innerHTML = affichage;
+}
+

@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="assets/css/style.css">
         <script type="text/javascript" language="javascript" src="assets/js/main.js"></script>
+		<link rel="shortcut icon" type="image/png" href="assets/img/flavicon.png"/>
     </head>
 
     <body>
@@ -14,12 +15,9 @@
 
 
 <div class="entete">
-		<img src="assets/img/sorbonne-nouvelle-devise-trapezes.png" height="75"/>
-
-		<h1 id="texte1">Amandine Jouvenel</h1>
-		<h2>L3 de Sciences du langage</h2>
-
-        <img src="assets/img/imageprofil.png" height="175"/>
+		<img align="right" src="assets/img/sorbonne-nouvelle-devise-trapezes.png" height="75"/>
+		<h1 id="texte1" align="left" >Amandine Jouvenel</h1>
+		<h2 align="left">L3 de Sciences du langage</h2>
 	</div>
 	<div id="aboutme">
 		<div id="titre"><p>CV des trois dernières années</p></div>
@@ -37,9 +35,9 @@
 			</div>
 		<div id="titre"><p>Cinq dernières lectures</p></div>
 		<ol>
-	     		<li><i>Promenez-vous dans les bois</i>, R. Ware</li>
+	     		<li><i>Jalna</i>, M. de la Roche</li>
+				<li><i>Blackwater Tome 6</i>, M. McDowell</li>
 				<li><i>Blackwater Tome 5</i>, M. McDowell</li>
-				<li><i>Blackwater Tome 4</i>, M. McDowell</li>
 	     		<li><i>No et moi</i>, D. Vigan</li>
 	     		<li><i>La Maison du péril</i>, A. Christie</li>
 		</ol>
@@ -52,27 +50,66 @@
 <!-- Analyse des données dans un fichier -->
 
      <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
-        <button id="boutonAide" onclick="afficheCacheAide()">Afficher l'aide</button>
+		<h4>Analyse des données dans un fichier</h4>
+        <button id="boutonAide" onclick="afficheCacheAide()">Besoin d'aide ?</button>
         <br />
         <div id="aide" style="display: none">
             <h2>Ceci est l'aide de l'utilisation du site.</h2>
-            <h3>Bonjour.</h3>
+           
+		   <h3>Bonjour.</h3>
             <p>Le bouton <button onclick="javascript:void(0);">Bonjour</button> permet d'afficher un message de bienvenue.</p>
-            <h3>Charger un fichier texte.</h3>
+            
+			<h3>Charger un fichier texte.</h3>
             <p>Pour commencer, il faut donner un fichier texte via le bouton <button onclick="javascript:void(0);">Choose File</button></p>
             <p>Le texte chargé sera affiché à gauche. Il sera segmenté automatiquement, son nombre de tokens sera alors affiché.</p>
-            <h3>Compter les mots.</h3>
+            
+			<h3>Compter les mots.</h3>
             <p>Pour avoir le comptage des mots, triés du plus fréquent au moins fréquent, on clique sur le bouton <button onclick="javascript:void(0);">Dictionnaire</button></p>
             <p>Le tableau sera affiché à droite.</p>
-            <h3>Afficher les lignes qui contiennent un motif.</h3>
-            <p>Pour afficher les lignes qui contiennent un motif, on clique sur le bouton <button onclick="javascript:void(0);">grep</button></p>
+            
+			<h3>Afficher les lignes qui contiennent un motif.</h3>
+            <p>Pour afficher les lignes qui contiennent un motif, on clique sur le bouton <button onclick="javascript:void(0);">Grep</button></p>
             <p>Il faut avoir chargé un fichier en mémoire et renseigné le champs <label class="mylabel"><small>Pôle</small></label>.</p>
             <p><a href="https://fr.wikipedia.org/wiki/Grep">grep</a> est une commande historique de Unix ayant cette fonctionnalité. Nous employons ce nom en hommage.</p>
             <p>Les lignes seront affichées à droite.</p>
+			
 			<h3>Afficher les contextes d'apparition d'un mot.</h3>
-            <p>Pour afficher les contextes d'apparition d'un mot, on clique sur le bouton <button onclick="javascript:void(0);">concordancier</button></p>
+            <p>Pour afficher les contextes d'apparition d'un mot, on clique sur le bouton <button onclick="javascript:void(0);">Concordancier</button></p>
             <p>Il faut avoir chargé un fichier en mémoire et renseigné le champs <label class="mylabel"><small>Pôle</small></label> ainsi que le champs <label class="mylabel"><small>Longueur</small></label>.</p>
-        </div>
+			
+			<h3>Compter le nombre de voyelles.</h3>
+            <p>Pour afficher le nombre de voyelles, on clique sur le bouton <button onclick="javascript:void(0);">Nombre de voyelles</button></p>
+            <p>Le nombre de voyelles s'affichera à droite.</p>
+			
+			<h3>Compter le nombre de consonnes.</h3>
+            <p>Pour afficher le nombre de consonnes, on clique sur le bouton <button onclick="javascript:void(0);">Nombre de consonnes</button></p>
+            <p>Le nombre de consonnes s'affichera à droite.</p>
+			
+			<h3>Trouver le mot le plus long.</h3>
+            <p>Pour trouver le mot le plus long, on clique sur le bouton <button onclick="javascript:void(0);">Mot le plus long</button></p>
+            <p>Le mot le plus long s'affichera à droite.</p>
+			
+			<h3>Trouver le mot le plus court.</h3>
+            <p>Pour trouver le mot le plus court, on clique sur le bouton <button onclick="javascript:void(0);">Mot le plus court</button></p>
+            <p>Le mot le plus court s'affichera à droite.</p>
+
+			<h3>Mettre le texte en minuscules.</h3>
+            <p>Pour mettre le texte en minuscules, on clique sur le bouton <button onclick="javascript:void(0);">Minuscules</button></p>
+            <p>Le texte en minuscules s'affichera à droite.</p>
+			
+			<h3>Mettre le texte en majuscules.</h3>
+            <p>Pour mettre le texte en majuscules, on clique sur le bouton <button onclick="javascript:void(0);">Majuscules</button></p>
+            <p>Le texte en majuscules s'affichera à droite.</p>
+			
+			<h3>Traduire le texte en chèvre.</h3>
+            <p>Pour traduire le texte en chèvre, on clique sur le bouton <button onclick="javascript:void(0);">Traduction en chèvre</button></p>
+            <p>Le texte traduit en chèvre s'affichera à droite.</p>
+			
+			<h3>Traduire le texte en dindon.</h3>
+            <p>Pour traduire le texte en chèvre, on clique sur le bouton <button onclick="javascript:void(0);">Traduction en dindon</button></p>
+            <p>Le texte traduit en dindon s'affichera à droite.</p>
+
+		</div>
     </div>
 
     <div id="page-wrapper">
@@ -94,7 +131,7 @@
             <small>
                 <label for="poleID" class="mylabel">Pôle</label>
                 &nbsp;
-                <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
+                <input type="text" placeholder="pas le pôle nord" name="pole" id="poleID" size="20" />
             </small>
             &nbsp;
             <small>
@@ -108,23 +145,34 @@
             <br />
             <br />
             <!--<button class="submit" onclick="segmentation();"><span>Segmentation</span></button>-->
-            <button class="submit" onclick="dictionnaire();"><span>dictionnaire</span></button>
-            <button class="submit" onclick="grep()"><span>grep</span></button>
-            <button class="submit" onclick="concordancier()"><span>concordancier</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
-            <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+            <button class="submit" onclick="dictionnaire();"><span>Dictionnaire</span></button>
+            <button class="submit" onclick="grep()"><span>Grep</span></button>
+            <button class="submit" onclick="concordancier()"><span>Concordancier</span></button>
+			<br />
+			<br />
+            <button class="submit" onclick="voyelles()"><span>Nombre de voyelles</span></button>
+            <button class="submit" onclick="consonnes()"><span>Nombre de consonnes</span></button>
+			<br />
+			<br />
+            <button class="submit" onclick="motlepluslong()"><span>Mot le plus long</span></button>
+            <button class="submit" onclick="motlepluscourt()"><span>Mot le plus court</span></button>
+            <button class="submit" onclick="minuscule()"><span>Minuscules</span></button>
+            <button class="submit" onclick="majuscule()"><span>Majuscules</span></button>
+			<br />
+			<br />
+			<button class="submit" onclick="chevre()"><span>Traduction en chèvre</span></button>
+			<button class="submit" onclick="dindon()"><span>Traduction en dindon</span></button>
         </p>
     </div>
     <div id="logger" style="width:100%"></div>
     <br />
     <div id="Global">
-        <div id="fileDisplayArea"></div>
-        <div id="page-analysis"></div>
+        <div id="fileDisplayArea"><h5>Texte</h5></div>
+        <div id="page-analysis"><h5>Analyse</h5></div>
     </div>
 
     <footer>
-      <p><a href="http://www.univ-paris3.fr/">Lien vers le site de Sorbonne Nouvelle.</a></p>
+      <p><a href="http://www.univ-paris3.fr/">Sorbonne Nouvelle</a></p>
     </footer>
 
 </div>
