@@ -1,7 +1,7 @@
 html {
     font-family: Courier, monospace;
     font-size: 14px;
-	background-image: url(https://i.pinimg.com/originals/26/8b/d4/268bd401ab139a7f85c7ec08997b1e92.png);
+	background-image: url(https://www.azutura.com/media/catalog/product/cache/49/image/650x/040ec09b1e35df139433887a97daa66f/W/S/WS-50272_WP.jpg);
     width:100vw; /* en soi, inutile, voire peut avoir des effets indésirables */
 }
 
@@ -33,6 +33,12 @@ h5 {
 	text-align: center;
 }
 
+h6 {
+	font-size: 1.4rem;
+	font-family: Papyrus;
+	color: black;
+}
+
 table, th, td {
     border : 1px solid black;
 	background-color: rgb(226, 220, 214);
@@ -56,7 +62,9 @@ table, th, td {
 
 #aboutme {
     padding-left:10%;
+	padding-right:10%;
 	color: White;
+	font-size: 1.3rem;
 }
 
 #titre {
@@ -67,6 +75,10 @@ table, th, td {
 	background-image: linear-gradient(rgb(163, 142, 122), rgb(226, 220, 214));
 	border: 2px solid black;
     padding-left:2%;
+	font-size: 1.4rem;
+	font-family: Papyrus;
+	color: black;
+	text-align: justify;
 }
 
 footer {

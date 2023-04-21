@@ -58,10 +58,10 @@ function afficheCacheAide() {
     
     if (display === "none") {
         aide.style.display = "block";
-        boutonAide.innerText = "Cacher l'aide";
+        boutonAide.innerText = "Refermer le parchemin";
     } else {
         aide.style.display = "none";
-        boutonAide.innerText = "Afficher l'aide";
+        boutonAide.innerText = "Demander de l'aide au Grand Sorcier";
     }
 }
 
@@ -491,7 +491,7 @@ function chevre() {
 		}
 	}
 	
-	var affichage = "<img src='assets/img/gifchevre.gif' height=auto><br/>"+texte+"";
+	var affichage = "<img src='assets/img/gifchevre.gif' height=400px><br/>"+texte+"";
 	
 	document.getElementById("page-analysis").innerHTML = affichage;
 }
@@ -524,7 +524,7 @@ function dindon() {
 		}
 	}
 	
-	var affichage = "<img src='assets/img/gifdindon.gif' height=auto><br/>"+texte+"";
+	var affichage = "<img src='assets/img/gifdindon.gif' height=300px><br/>"+texte+"";
 	
 	document.getElementById("page-analysis").innerHTML = affichage;
 }
