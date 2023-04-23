@@ -49,6 +49,27 @@ window.onload = function() {
 
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------
+// Proposer un exemple de texte
+
+function poeme(){
+	var poeme = 'Jabberwocky<br /><br />';
+	poeme+="'Twas brillig, and the slithy toves<br />Did gyre and gimble in the wabe<br />All mimsy were the borogoves,<br />And the mome raths outgrabe.<br /><br />";
+	poeme+='“Beware the Jabberwock, my son<br />The jaws that bite, the claws that catch!<br />Beware the Jubjub bird, and shun<br />The frumious Bandersnatch!”<br /><br />';
+	poeme+='He took his vorpal sword in hand;<br />Long time the manxome foe he sought—<br />So rested he by the Tumtum tree,<br />And stood awhile in thought.<br /><br />';
+	poeme+='And, as in uffish thought he stood,<br />The Jabberwock, with eyes of flame,<br />Came whiffling through the tulgey wood,<br />And burbled as it came!<br /><br />';
+	poeme+='One, two! One, two! And through and through<br />The vorpal blade went snicker-snack!<br />He left it dead, and with its head<br />He went galumphing back.<br /><br />';
+	poeme+='“And hast thou slain the Jabberwock?<br />Come to my arms, my beamish boy!<br />O frabjous day! Callooh! Callay!”<br />He chortled in his joy.<br /><br />';
+	poeme+="’Twas brillig, and the slithy toves<br />Did gyre and gimble in the wabe;<br />All mimsy were the borogoves,<br />And the mome raths outgrabe.<br /><br />";
+	poeme+='Lewis Carroll';
+	document.getElementById('fileDisplayArea').innerHTML = poeme;
+	//fileInputnonVide();
+	segmentation();
+}
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 // Afficher et cacher l'aide
 
 function afficheCacheAide() {
@@ -321,48 +342,6 @@ function consonnes() {
 }
 
 
-
-//---------------------------------------------------------------------------------------------------------------------------------------------------
-// Mots les plus fréquents
-
-function motFreqCamembert() {
-	maxi=document.getElementById('maxicamID').value;
-	var toutTexte = document.getElementById("fileDisplayArea").innerText;
-	var freqs=freqMots(toutTexte.toLowerCase());
-	var etiquettes=[];
-	var series=[]
-	Object.keys(freqs).sort(function(a,b){return freqs[b]-freqs[a]}).forEach(function(m) {
-		if (m=="") return false; 
-		if (etiquettes.length < maxi) {
-				etiquettes.push(m);
-				series.push(freqs[m]);
-			}
-		else {
-				if (etiquettes.length == maxi) {
-					etiquettes.push("reste");
-					series.push(freqs[m]);
-				}
-				else {
-					series[maxi]+=freqs[m];
-				}
-			}
-		
-	});
-	var data = {
-			labels: etiquettes,
-			series: series
-		};
-	var options = {
-			width: 600,
-			height: 600
-		};
-	document.getElementById('page-analysis').innerHTML ="";		
-	new Chartist.Pie('#page-analysis', data, options);
-	
-}
-
-
-
 //---------------------------------------------------------------------------------------------------------------------------------------------------
 // Mot le plus long
 
@@ -379,7 +358,7 @@ function motlepluslong() {
 	var texte = document.getElementById("fileDisplayArea").innerText;
 
 	// on segmente le texte en mots
-	var tokens = texte.split(/[\n\s,.;']+/);
+	var tokens = text_tokens;
 	
 	// on initialise une variable "max"
 	var max="";
@@ -410,7 +389,7 @@ function motlepluscourt() {
 	var texte = document.getElementById("fileDisplayArea").innerText;
 
 	// on segmente le texte en mots
-	var tokens = texte.split(/[\n\s,.;']+/);
+	var tokens = text_tokens;
 	
 	// on initialise une variable "min"
 	var min = tokens[0];
@@ -524,7 +503,7 @@ function dindon() {
 		}
 	}
 	
-	var affichage = "<img src='assets/img/gifdindon.gif' height=400px><br/>"+texte+"";
+	var affichage = "<img src='assets/img/gifdindon.gif' height=300px><br/>"+texte+"";
 	
 	document.getElementById("page-analysis").innerHTML = affichage;
 }

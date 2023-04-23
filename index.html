@@ -37,7 +37,7 @@
 
      <div style="margin: 50px 5% 0px 5%; padding: 50px 10%; border-top: 2px solid black;">
 		<h4>Analyse des données dans un fichier</h4>
-        <button id="boutonAide" onclick="afficheCacheAide()">Demander de l'aide au Grand Sorcier</button>
+        <button class="submit" id="boutonAide" onclick="afficheCacheAide()">Demander de l'aide au Grand Sorcier</button>
         <br />
         <div id="aide" style="display: none">
             <h6>Si vous lisez ceci, c'est que vous avez rencontré quelque difficulté. N'étant pas disponible pour le moment, je vous ai laissé quelques instructions pour vous aider.</h6>
@@ -107,8 +107,11 @@
         <br />
         <div style="text-align:center">
             <span>
-                <label for="fileInput" class="btn"><small>Sélectionner un fichier au format .txt :</small></label>
+                <label for="fileInput" class="btn">Sélectionner un fichier au format .txt :</label>
                 <input id="fileInput" type="file" accept="text/plain" name="Fichier (.txt)" />
+				<br />
+				<br />
+				<p>Voici un exemple de texte pour tester les fonctionnalités du site : </p><button class="submit" onclick="poeme();"><span>Jabberwocky</span></button>
             </span>
         </div>
         <br />
@@ -116,7 +119,7 @@
             <small>
                 <label for="delimID" class="mylabel">Délimiteur(s)</label>
                 &nbsp;
-                <input type="text" value=" ,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
+                <input type="text" value=" ,;’'*£°@~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
             </small>
             <br />
             <small>
@@ -128,39 +131,39 @@
             <small>
                 <label for="lgID" class="mylabel">Longueur</label>
                 &nbsp;
-                <input type="text" value="10" name="lg" id="lgID" size="10" />
+                <input type="text" value="5" name="lg" id="lgID" size="5" />
             </small>
             <br />
             <br />
-            <button onclick="alert('Bonjour et bienvenue sur le site !');"><span>Bonjour</span></button>
+            <button class="submit" onclick="alert('Bonjour et bienvenue sur le site !');"><span>Bonjour</span></button>
             <br />
             <br />
             <!--<button class="submit" onclick="segmentation();"><span>Segmentation</span></button>-->
             <button class="submit" onclick="dictionnaire();"><span>Dictionnaire</span></button>
-            <button class="submit" onclick="grep()"><span>Grep</span></button>
-            <button class="submit" onclick="concordancier()"><span>Concordancier</span></button>
+            <button class="submit" onclick="grep();"><span>Grep</span></button>
+            <button class="submit" onclick="concordancier();"><span>Concordancier</span></button>			
 			<br />
 			<br />
 			<p>Demander au Comptable fou : </p>
-            <button class="submit" onclick="voyelles()"><span>Le nombre de voyelles</span></button>
-            <button class="submit" onclick="consonnes()"><span>Le nombre de consonnes</span></button>
+            <button class="submit" onclick="voyelles();"><span>Le nombre de voyelles</span></button>
+            <button class="submit" onclick="consonnes();"><span>Le nombre de consonnes</span></button>
 			<br />
 			<br />
-            <button class="submit" onclick="motlepluslong()"><span>Le mot le plus long</span></button>
-            <button class="submit" onclick="motlepluscourt()"><span>Le mot le plus court</span></button>
+            <button class="submit" onclick="motlepluslong();"><span>Le mot le plus long</span></button>
+            <button class="submit" onclick="motlepluscourt();"><span>Le mot le plus court</span></button>
 			<br />
 			<br />
 			<p>Prendre une potion magique pour : </p>
-            <button class="submit" onclick="minuscule()"><span>rétrécir (minuscules)</span></button>
-            <button class="submit" onclick="majuscule()"><span>GRANDIR (MAJUSCULES)</span></button>
+            <button class="submit" onclick="minuscule();"><span>rétrécir (minuscules)</span></button>
+            <button class="submit" onclick="majuscule();"><span>GRANDIR (MAJUSCULES)</span></button>
 			<br />
 			<br />
 			<p>Demander à la Chèvre énamourée de : </p>
-			<button class="submit" onclick="chevre()"><span>Traduire votre texte en chèvre</span></button>
+			<button class="submit" onclick="chevre();"><span>Traduire votre texte en chèvre</span></button>
 			<br />
 			<br />
 			<p>Demander au Dindon curieux de : </p>
-			<button class="submit" onclick="dindon()"><span>Traduire votre texte en dindon</span></button>
+			<button class="submit" onclick="dindon();"><span>Traduire votre texte en dindon</span></button>
         </p>
     </div>
     <div id="logger" style="width:100%"></div>
